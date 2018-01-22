@@ -34,86 +34,56 @@ namespace Portfolio\Admin
             $this->login = $login;
             $this->motdepasse = $motdepasse;
         }
-        
-        /**
-         * @return number
-         */
+
         public function getIdUtilisateur()
         {
             return $this->idUtilisateur;
         }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getNom()
         {
             return $this->nom;
         }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getPrenom()
         {
             return $this->prenom;
         }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getLogin()
         {
             return $this->login;
         }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getMotDePasse()
         {
             return $this->motdepasse;
         }
-    
-        /**
-         * @param number $id
-         */
+
         public function setIdUtilisateur($idUtilisateur)
         {
             $this->idUtilisateur = $idUtilisateur;
             return $this;
         }
     
-        /**
-         * @param Ambigous <string, unknown> $nom
-         */
         public function setNom($nom)
         {
             $this->nom = $nom;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <string, unknown> $prenom
-         */
+
         public function setPrenom($prenom)
         {
             $this->prenom = $prenom;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <string, unknown> $login
-         */
+
         public function setLogin($login)
         {
             $this->login = $login;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <string, unknown> $motDePasse
-         */
+
         public function setMotDePasse($motdepasse)
         {
             $this->motdepasse = $motdepasse;
@@ -148,52 +118,34 @@ namespace Portfolio\Ppe
             $this->nomProjet = $nom;
             $this->description = $description;
         }
-        
-        /**
-         * @return number
-         */
+
         public function getId()
         {
             return $this->id;
         }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getNomProjet()
         {
             return $this->nomProjet;
         }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getDescription()
         {
             return $this->description;
         }
-    
-        /**
-         * @param number $id
-         */
+
         public function setId($id)
         {
             $this->id = $id;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <string, unknown> $nomProjet
-         */
+
         public function setNomProjet($nomProjet)
         {
             $this->nomProjet = $nomProjet;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <string, unknown> $description
-         */
+
         public function setDescription($description)
         {
             $this->description = $description;
@@ -219,74 +171,50 @@ namespace Portfolio\Document
         private $description = "";
         private $url = "";
         
-        function __construct($titre,$description,$url)
+        function __construct($titre,$description)
         {
             $this->titre = $titre;
             $this->description = $description;
-            $this->url = $url;
         }
-        /**
-         * @return number
-         */
+
         public function getIdDoc()
         {
             return $this->idDoc;
         }
     
-        /**
-         * @return Ambigous <string, unknown>
-         */
         public function getTitre()
         {
             return $this->titre;
         }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getDescription()
         {
             return $this->description;
         }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getUrl()
         {
             return $this->url;
         }
-    
-        /**
-         * @param number $idDoc
-         */
+
         public function setIdDoc($idDoc)
         {
             $this->idDoc = $idDoc;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <string, unknown> $titre
-         */
+
         public function setTitre($titre)
         {
             $this->titre = $titre;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <string, unknown> $description
-         */
+
         public function setDescription($description)
         {
             $this->description = $description;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <string, unknown> $url
-         */
+
         public function setUrl($url)
         {
             $this->url = $url;
@@ -322,68 +250,45 @@ namespace Portfolio\Preuve
         {
             //TODO
         }
-        /**
-         * @return number
-         */
+
         public function getIdPreuve()
         {
             return $this->idPreuve;
         }
-    
-        /**
-         * @return Ambigous <boolean, unknown>
-         */
+
         public function getValide()
         {
             return $this->valide;
         }
-    
-        /**
-         * @return mixed
-         */
+
         public function getElement()
         {
             return $this->element;
         }
-    
-        /**
-         * @return Ambigous <number, unknown>
-         */
+
         public function getIdDoc()
         {
             return $this->idDoc;
         }
-    
-        /**
-         * @param number $idPreuve
-         */
+
         public function setIdPreuve($idPreuve)
         {
             $this->idPreuve = $idPreuve;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <boolean, unknown> $valide
-         */
+
         public function setValide($valide)
         {
             $this->valide = $valide;
             return $this;
         }
-    
-        /**
-         * @param mixed $element
-         */
+
         public function setElement($element)
         {
             $this->element = $element;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <number, unknown> $idDoc
-         */
+
         public function setIdDoc($idDoc)
         {
             $this->idDoc = $idDoc;
@@ -402,42 +307,47 @@ namespace Portfolio\Competence
 {
     class Competence
     {
-        private $idCompetence = -1;
+        private $idCompetence = "-";
         private $description = "";
+        private $idact = "";
         
-        function __construct($description)
+
+        function __construct($idCompetece,$idAct,$description)
         {
+            $this->idCompetence = $idCompetece;
+            $this->idact = $idAct;
             $this->description = $description;
         }
         
-        /**
-         * @return number
-         */
+        public function getIdact()
+        {
+            return $this->idact;
+        }
+
+
         public function getIdCompetence()
         {
             return $this->idCompetence;
         }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getDescription()
         {
             return $this->description;
         }
-    
-        /**
-         * @param number $idCompetence
-         */
+
         public function setIdCompetence($idCompetence)
         {
             $this->idCompetence = $idCompetence;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <string, unknown> $description
-         */
+        
+        public function setIdact($idact)
+        {
+            $this->idact = $idact;
+            return $this;
+        }
+
+        
         public function setDescription($description)
         {
             $this->description = $description;
@@ -446,7 +356,7 @@ namespace Portfolio\Competence
         
         function __toString()
         {
-            $rep = "<div classe=\"Competence\">$this->idCompetence $this->description</div>";
+            $rep = "<div classe=\"Competence\">$this->idCompetence $this->idact $this->description</div>";
             // $rep = "<img width=" . Carte::largeur . " height=" . Carte::hauteur . " " . $src . " alt=\"image\" value=\"$this->position\" />";
             return $rep;
         }
@@ -458,111 +368,115 @@ namespace Portfolio\Activite
 {
     class Activite
     {
-        private $idAct = -1;
-        private $idCompetence = -1;
+        private $idAct = "";
+        private $idDomAct = "";
         private $titre = "";
-        private $activite = -1;
         private $validee = FALSE;
         
-        function __construct($idCompetence,$titre, $activite, $validee)
+        function __construct($idAct,$idDomAct,$titre)
         {
-            $this->idCompetence = $idCompetence;
+            $this->idAct = $idAct;
+            $this->idDomAct = $idDomAct;
             $this->titre = $titre;
-            $this->activite = $activite;
-            $this->validee = $validee;
         }
         
-        
-        /**
-         * @return number
-         */
+
+        public function getIdDomAct()
+        {
+            return $this->idDomAct;
+        }
+
+    
         public function getIdAct()
         {
             return $this->idAct;
         }
-    
-        /**
-         * @return Ambigous <number, unknown>
-         */
-        public function getIdCompetence()
-        {
-            return $this->idCompetence;
-        }
-    
-        /**
-         * @return Ambigous <string, unknown>
-         */
+
         public function getTitre()
         {
             return $this->titre;
         }
-    
-        /**
-         * @return Ambigous <number, unknown>
-         */
-        public function getActivite()
-        {
-            return $this->activite;
-        }
-    
-        /**
-         * @return Ambigous <boolean, unknown>
-         */
+
         public function getValidee()
         {
             return $this->validee;
         }
     
-        /**
-         * @param number $idAct
-         */
+
         public function setIdAct($idAct)
         {
             $this->idAct = $idAct;
             return $this;
         }
-    
-        /**
-         * @param Ambigous <number, unknown> $idCompetence
-         */
-        public function setIdCompetence($idCompetence)
-        {
-            $this->idCompetence = $idCompetence;
-            return $this;
-        }
-    
-        /**
-         * @param Ambigous <string, unknown> $titre
-         */
+
         public function setTitre($titre)
         {
             $this->titre = $titre;
             return $this;
         }
     
-        /**
-         * @param Ambigous <number, unknown> $activite
-         */
-        public function setActivite($activite)
-        {
-            $this->activite = $activite;
-            return $this;
-        }
-    
-        /**
-         * @param Ambigous <boolean, unknown> $validee
-         */
+
         public function setValidee($validee)
         {
             $this->validee = $validee;
             return $this;
         }
+        public function setIdDomAct($idDomAct)
+        {
+            $this->idDomAct = $idDomAct;
+            return $this;
+        }
     
         function __toString()
         {
-            $rep = "<div classe=\"Acitivite\">$this->idAct $this->idCompetence $this->titre $this->validee</div>";
+            $rep = "<div classe=\"Acitivite\">$this->idAct $this->idDomAct $this->titre $this->validee</div>";
             // $rep = "<img width=" . Carte::largeur . " height=" . Carte::hauteur . " " . $src . " alt=\"image\" value=\"$this->position\" />";
             return $rep;
         }
     }
+}
+namespace Portfolio\DomaineActivite
+{
+    
+    class DomaineActivite
+    {
+        private $idDomAct = "";
+        private $titre = "";
+        
+        function __construct($idDomAct,$titre)
+        {
+            $this->idDomAct = $idDomAct;
+            $this->titre = $titre;
+        }
+
+        public function getIdDomAct()
+        {
+            return $this->idDomAct;
+        }
+
+        public function getTitre()
+        {
+            return $this->titre;
+        }
+
+        public function setIdDomAct($idDomAct)
+        {
+            $this->idDomAct = $idDomAct;
+            return $this;
+        }
+
+        public function setTitre($titre)
+        {
+            $this->titre = $titre;
+            return $this;
+        }
+    
+        function __toString()
+        {
+            $rep = "<div classe=\"DomaineActivite\">$this->idDomAct $this->titre</div>";
+            // $rep = "<img width=" . Carte::largeur . " height=" . Carte::hauteur . " " . $src . " alt=\"image\" value=\"$this->position\" />";
+            return $rep;
+        }
+    }
+    
 }

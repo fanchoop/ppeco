@@ -121,34 +121,37 @@ namespace DAO\Competence
             $stmt->execute();
             
             $row = $stmt->fetch();
-            $idCompetence = $row["idcompetence"];
+            $idCompetence = $row["idCompetence"];
+            $idAct = $row["idAct"];
             $description = $row["description"];
-            $rep = new \Portfolio\Competence\Competence($description);
-            $rep->setidCompetence($idCompetence);
+            $rep = new \Portfolio\Competence\Competence($idCompetence,$idAct,$description);
             return $rep;
         }
 
         public function update($objet)
         {
-            $sql = "UPDATE $this->table SET description=:description WHERE $this->key=:id";
+            $sql = "UPDATE $this->table SET idAct=:idAct,description=:description WHERE $this->key=:id";
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
             $idCompetence = $objet->getidCompetence();
             $idAct = $objet->getIdAct();
             $description = $objet->getDescription();
             $stmt->bindParam(':id', $idCompetence);
+            $stmt->bindParam(':idAct', $idAct);
             $stmt->bindParam(':description', $description);
             $stmt->execute();
         }
 
         public function create($objet)
         {
-            $sql = "INSERT INTO $this->table  (description) VALUES (:desc);";
+            $sql = "INSERT INTO $this->table  (idCompetence,idAct,description) VALUES (:idCompetence,:idAct,:description);";
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
+            $idCompetence = $objet->getIdCompetence();
+            $idAct = $objet->getIdAct();
             $description = $objet->getDescription();
-            $stmt->bindParam(':desc', $description);
+            $stmt->bindParam(':idCompetence', $idCompetence);
+            $stmt->bindParam(':idAct', $idAct);
+            $stmt->bindParam(':description', $description);
             $stmt->execute();
-            $id = $this->getLastKey();
-            $objet->setIdCompetence($id);
         }
 
         public function delete($objet)
@@ -246,39 +249,40 @@ namespace DAO\Activite
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            
             $row = $stmt->fetch();
             $idAct = $row["idAct"];
-            $idCompetence = $row["idcompetence"];
+            $idDomAct = $row["idDomAct"];
             $titre = $row["titre"];
-            $rep = new \Portfolio\Activite\Activite($idUtilisateur, $idCompetence, $titre);
+            $rep = new \Portfolio\Activite\Activite($idAct,$idDomAct,$titre);
             $rep->setIdAct($idAct);
             return $rep;
         }
     
         public function update($objet)
         {
-            $sql = "UPDATE $this->table SET idcompetence=:idcompetence,titre=:titre WHERE $this->key=:id";
+            $sql = "UPDATE $this->table SET idDomAct=:idDomAct,titre=:titre WHERE $this->key=:id";
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
-            $idCompetence = $objet->getIdCompetence();
+            $idAct = $objet->getIdAct();
+            $idDomAct = $objet->getIdDomAct();
             $titre = $objet->getTitre();
             $stmt->bindParam(':id', $idAct);
-            $stmt->bindParam(':idcompetence', $idCompetence);
+            $stmt->bindParam(':idDomAct', $idDomAct);
             $stmt->bindParam(':titre', $titre);
             $stmt->execute();
         }
     
         public function create($objet)
         {
-            $sql = "INSERT INTO $this->table  (idCompetence,titre) VALUES (:idcompetence,:titre);";
+            $sql = "INSERT INTO $this->table  (idAct,idDomAct,titre) VALUES (:idAct,:idDomAct,:titre);";
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
-            $idCompetence = $objet->getIdCompetence();
+            $idAct = $objet->getIdAct();
+            $idDomAct = $objet->getIdDomAct();
             $titre = $objet->getTitre();
-            $stmt->bindParam(':idcompetence', $idCompetence);
+            $stmt->bindParam(':idAct', $idAct);
+            $stmt->bindParam(':idDomAct', $idDomAct);
             $stmt->bindParam(':titre', $titre);
             $stmt->execute();
-            $id = $this->getLastKey();
-            $objet->setIdAct($id);
+            
         }
     
         public function delete($objet)
@@ -372,51 +376,41 @@ namespace DAO\DomaineActivite
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            
             $row = $stmt->fetch();
             $idDomAct = $row["idDomAct"];
-            $idAct = $row["idAct"];
             $titre = $row["titre"];
-            $description = $row["description"];
-            //$rep = new \Portfolio\DomaineActivite\DomaineActivite($idAct,$titre, $description);
+            $rep = new \Portfolio\DomaineActivite\DomaineActivite("",$titre);
             $rep->setIdDomAct($idDomAct);
             return $rep;
         }
         
         public function update($objet)
         {
-            $sql = "UPDATE $this->table SET idAct=:idAct,titre=:titre,description=:description WHERE $this->key=:id";
+            $sql = "UPDATE $this->table SET titre=:titre WHERE $this->key=:id";
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
-            $idAct = $objet->getIdAct();
-            $description = $objet->getDescription();
+            $idDomAct = $objet->getIdDomAct();
             $titre = $objet->getTitre();
             $stmt->bindParam(':id', $idDomAct);
-            $stmt->bindParam(':idAct', $idAct);
             $stmt->bindParam(':titre', $titre);
-            $stmt->bindParam(':description', $description);
             $stmt->execute();
         }
         
         public function create($objet)
         {
-            $sql = "INSERT INTO $this->table  (idAct,titre,description) VALUES (:idAct,:titre,:description);";
+            $sql = "INSERT INTO $this->table  (idDomAct,titre) VALUES (:idDomAct,:titre);";
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
-            $idAct = $objet->getIdAct();
+            $idDomAct = $objet->getIdDomAct();
             $titre = $objet->getTitre();
-            $description = $objet->getDescription();
-            $stmt->bindParam(':idAct', $idAct);
+            $stmt->bindParam(':idDomAct', $idDomAct);
             $stmt->bindParam(':titre', $titre);
-            $stmt->bindParam(':description', $description);
             $stmt->execute();
-            $id = $this->getLastKey();
-            $objet->setIdDomAct($idDomAct);
         }
         
         public function delete($objet)
         {
             $sql = "DELETE FROM $this->table WHERE $this->key=:id";
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
-            $idDomAct = $objet->getIDDoc();
+            $idDomAct = $objet->getIdDomAct();
             $stmt->bindParam(':id',$idDomAct);
             $stmt->execute();}
             
