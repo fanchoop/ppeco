@@ -11,8 +11,8 @@ namespace DB\Connexion
             static $dbh = NULL;
             if ($dbh==NULL) {
                 $dsn = "mysql:host=localhost:3306;dbname=ppegroupe";
-                $username = "Thierry";
-                $password = "Nono27041994";
+                $username = //TODO
+                $password = //TODO
                 //Goto project -> properties -> Project Facets and enable both facets
                 //pour expliciter le namespace, on préfixe la classe avec \
                 $options = array (
