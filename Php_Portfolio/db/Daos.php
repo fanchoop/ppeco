@@ -124,33 +124,38 @@ namespace DAO\Competence
             $idCompetence = $row["idCompetence"];
             $idAct = $row["idAct"];
             $description = $row["description"];
-            $rep = new \Portfolio\Competence\Competence($idCompetence,$idAct,$description);
+            $idPrevue = $row["idPreuve"];
+            $rep = new \Portfolio\Competence\Competence($idCompetence,$idAct,$description,$idPreuve);
             return $rep;
         }
 
         public function update($objet)
         {
-            $sql = "UPDATE $this->table SET idAct=:idAct,description=:description WHERE $this->key=:id";
+            $sql = "UPDATE $this->table SET idAct=:idAct,description=:description,idPreuve=:idPreuve WHERE $this->key=:id";
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
             $idCompetence = $objet->getidCompetence();
             $idAct = $objet->getIdAct();
             $description = $objet->getDescription();
+            $idPreuve = $objet->getIdPreuve();
             $stmt->bindParam(':id', $idCompetence);
             $stmt->bindParam(':idAct', $idAct);
             $stmt->bindParam(':description', $description);
+            $stmt->bindColumn(':idPreuve', $idPreuve);
             $stmt->execute();
         }
 
         public function create($objet)
         {
-            $sql = "INSERT INTO $this->table  (idCompetence,idAct,description) VALUES (:idCompetence,:idAct,:description);";
+            $sql = "INSERT INTO $this->table  (idCompetence,idAct,description,idPreuve) VALUES (:idCompetence,:idAct,:description,:idPreuve);";
             $stmt = \DB\Connexion\Connexion::getInstance()->prepare($sql);
             $idCompetence = $objet->getIdCompetence();
             $idAct = $objet->getIdAct();
             $description = $objet->getDescription();
+            $idPreuve = $objet->getIdPreuve();
             $stmt->bindParam(':idCompetence', $idCompetence);
             $stmt->bindParam(':idAct', $idAct);
             $stmt->bindParam(':description', $description);
+            $stmt->bindColumn(':idPreuve', $idPreuve);
             $stmt->execute();
         }
 

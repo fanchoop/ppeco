@@ -19,10 +19,10 @@ include ("../db/Daos.php");
 // $vol = $daoAd->read(1);
 // echo "$ad";
 
-//$daoPreuve = new \DAO\Preuve\PreuveDAO();
-// $preuve = new \Portfolio\Preuve\Preuve("test", 1);                           //Le Create
-// $daoPreuve->create($preuve);
-// echo "$preuve";
+$daoPreuve = new \DAO\Preuve\PreuveDAO();
+$preuve = new \Portfolio\Preuve\Preuve("test", 1);                           //Le Create
+$daoPreuve->create($preuve);
+echo "$preuve";
 
 
 // $preuve = $daoPreuve->read(2);

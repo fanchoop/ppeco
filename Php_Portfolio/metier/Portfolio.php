@@ -5,7 +5,7 @@ namespace Portfolio\Utilisateur
     {
         protected $mail = "@";
         
-        function seConnecter()
+        public function seConnecter($sql)
         {
             //TODO
         }
@@ -63,31 +63,31 @@ namespace Portfolio\Admin
         public function setIdUtilisateur($idUtilisateur)
         {
             $this->idUtilisateur = $idUtilisateur;
-            return $this;
+
         }
     
         public function setNom($nom)
         {
             $this->nom = $nom;
-            return $this;
+
         }
 
         public function setPrenom($prenom)
         {
             $this->prenom = $prenom;
-            return $this;
+
         }
 
         public function setLogin($login)
         {
             $this->login = $login;
-            return $this;
+
         }
 
         public function setMotDePasse($motdepasse)
         {
             $this->motdepasse = $motdepasse;
-            return $this;
+
         }
     
         function seDeconnecter()
@@ -200,25 +200,25 @@ namespace Portfolio\Document
         public function setIdDoc($idDoc)
         {
             $this->idDoc = $idDoc;
-            return $this;
+
         }
 
         public function setTitre($titre)
         {
             $this->titre = $titre;
-            return $this;
+
         }
 
         public function setDescription($description)
         {
             $this->description = $description;
-            return $this;
+
         }
 
         public function setUrl($url)
         {
             $this->url = $url;
-            return $this;
+
         }
         function __toString()
         {
@@ -235,7 +235,6 @@ namespace Portfolio\Preuve
     class Preuve
     {
         private $idPreuve = -1;
-        private $valide = FALSE;
         private $element = "";
         private $idDoc = -1;
         
@@ -246,10 +245,10 @@ namespace Portfolio\Preuve
         }
         
         
-        function modifierCouleur()
-        {
-            //TODO
-        }
+//         function modifierCouleur()
+//         {
+//             //TODO
+//         }
 
         public function getIdPreuve()
         {
@@ -274,25 +273,25 @@ namespace Portfolio\Preuve
         public function setIdPreuve($idPreuve)
         {
             $this->idPreuve = $idPreuve;
-            return $this;
+
         }
 
         public function setValide($valide)
         {
             $this->valide = $valide;
-            return $this;
+
         }
 
         public function setElement($element)
         {
             $this->element = $element;
-            return $this;
+
         }
 
         public function setIdDoc($idDoc)
         {
             $this->idDoc = $idDoc;
-            return $this;
+
         }
         function __toString()
         {
@@ -310,15 +309,24 @@ namespace Portfolio\Competence
         private $idCompetence = "-";
         private $description = "";
         private $idact = "";
+        private $idPreuve = "";
         
 
-        function __construct($idCompetece,$idAct,$description)
+        function __construct($idCompetece,$idAct,$description,$idPreuve)
         {
             $this->idCompetence = $idCompetece;
             $this->idact = $idAct;
             $this->description = $description;
+            $this->idPreuve = $idPreuve;
         }
         
+
+        public function getIdPreuve()
+        {
+            return $this->idPreuve;
+        }
+
+
         public function getIdact()
         {
             return $this->idact;
@@ -338,25 +346,26 @@ namespace Portfolio\Competence
         public function setIdCompetence($idCompetence)
         {
             $this->idCompetence = $idCompetence;
-            return $this;
         }
         
         public function setIdact($idact)
         {
             $this->idact = $idact;
-            return $this;
         }
 
         
         public function setDescription($description)
         {
             $this->description = $description;
-            return $this;
+        }
+        public function setIdPreuve($idPreuve)
+        {
+            $this->idPreuve = $idPreuve;
         }
         
         function __toString()
         {
-            $rep = "<div classe=\"Competence\">$this->idCompetence $this->idact $this->description</div>";
+            $rep = "<div classe=\"Competence\">$this->idCompetence $this->idact $this->description $this->idPreuve</div>";
             // $rep = "<img width=" . Carte::largeur . " height=" . Carte::hauteur . " " . $src . " alt=\"image\" value=\"$this->position\" />";
             return $rep;
         }
@@ -378,6 +387,7 @@ namespace Portfolio\Activite
             $this->idAct = $idAct;
             $this->idDomAct = $idDomAct;
             $this->titre = $titre;
+            $this->validee = $validee;
         }
         
 
@@ -406,25 +416,24 @@ namespace Portfolio\Activite
         public function setIdAct($idAct)
         {
             $this->idAct = $idAct;
-            return $this;
         }
 
         public function setTitre($titre)
         {
             $this->titre = $titre;
-            return $this;
         }
     
 
-        public function setValidee($validee)
+        public function setValidee()
         {
-            $this->validee = $validee;
-            return $this;
+            if (verifier($this)){
+                $this->validee = TRUE;
+                }
+            
         }
         public function setIdDomAct($idDomAct)
         {
             $this->idDomAct = $idDomAct;
-            return $this;
         }
     
         function __toString()
@@ -433,6 +442,21 @@ namespace Portfolio\Activite
             // $rep = "<img width=" . Carte::largeur . " height=" . Carte::hauteur . " " . $src . " alt=\"image\" value=\"$this->position\" />";
             return $rep;
         }
+        private function verifier($objet) {
+            $sql = "SELECT * FROM COMPETENCE WHERE idAct = 'this->$idAct'";
+            $validAct = TRUE;
+            if ($row = $result->fetch_row()){
+                do {
+                    if ($row [2] == NULL) {
+                     $validAct = FALSE;
+                    }
+                
+             }   while ($row = $result->fetch_row() || $validAct == FALSE);
+             }
+            $result->close();
+            return $validAct;
+        }
+        
     }
 }
 namespace Portfolio\DomaineActivite
@@ -462,13 +486,13 @@ namespace Portfolio\DomaineActivite
         public function setIdDomAct($idDomAct)
         {
             $this->idDomAct = $idDomAct;
-            return $this;
+
         }
 
         public function setTitre($titre)
         {
             $this->titre = $titre;
-            return $this;
+
         }
     
         function __toString()
