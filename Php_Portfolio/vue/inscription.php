@@ -6,10 +6,10 @@ include ("../db/Daos.php");
 <?php 
 
 // Vérification de la validité des informations
-$nom = "bon";
-$prenom = "jean";
-$login = "theoolait";
-$pass = "caca";
+$nom = "";
+$prenom = "";
+$login = "";
+$pass = "";
 
 // Hachage du mot de passe
 
